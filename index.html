@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중학 국어 서논술형의 기초 파악하기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f3f4f6; color: #1f2937; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* 스크롤바 디자인 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex justify-center items-center">
+
+    <div class="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row h-[90vh]">
+        
+        <!-- 사이드바 -->
+        <div class="w-full md:w-1/4 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto flex flex-col justify-between hidden md:flex">
+            <div>
+                <h1 class="text-xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    서논술형의 기초 파악하기
+                </h1>
+                <nav id="menuList" class="space-y-1"></nav>
+            </div>
+            
+            <div class="mt-6 pt-4 border-t border-gray-200">
+                <p class="text-xs text-gray-500 mb-2 text-center">오프라인 수업용 학습지 생성</p>
+                <button onclick="downloadWorksheet()" class="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-bold text-sm shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                    학습지 파일 다운로드 (B4)
+                </button>
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 영역 -->
+        <div class="w-full md:w-3/4 flex flex-col bg-white relative">
+            <div id="contentArea" class="flex-1 overflow-y-auto p-6 md:p-8 pb-24">
+                <!-- 내용이 JS로 렌더링 됩니다 -->
+            </div>
+            
+            <!-- 하단 네비게이션 컨트롤 -->
+            <div class="absolute bottom-0 left-0 w-full p-4 bg-white/90 backdrop-blur-sm border-t border-gray-100 flex justify-between items-center">
+                <button id="prevBtn" class="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed" onclick="changeTab(-1)">← 이전 문제</button>
+                <span id="pageIndicator" class="text-sm text-gray-500 font-bold bg-gray-100 px-3 py-1 rounded-full">1 / 10</span>
+                <button id="nextBtn" class="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed" onclick="changeTab(1)">다음 문제 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 이 안에 작성된 HTML은 브라우저 화면에 보이지 않으며, 다운로드 버튼 클릭 시 파일로 생성됩니다. -->
+    <script type="text/template" id="worksheetTemplate">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중학 국어 서논술형의 기초 파악하기 - 학생용 학습지</title>
+    <style>
+        @page { size: B4; margin: 15mm; }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap');
+        body {
+            font-family: 'Noto Serif KR', 'KoPub Batang', 'Malgun Gothic', serif;
+            font-size: 10pt; line-height: 1.5; color: #000; background: #f3f4f6; margin: 0; padding: 20px;
+        }
+        .page-container {
+            width: 250mm; margin: 0 auto 20px auto; background: #fff; padding: 15mm; box-shadow: 0 0 10px rgba(0,0,0,0.1); box-sizing: border-box; page-break-after: always;
+        }
+        .page-container:last-child {
+            page-break-after: auto; margin-bottom: 0;
+        }
+        .header { text-align: center; margin-bottom: 8mm; border-bottom: 3px double #000; padding-bottom: 5mm; }
+        .header h1 { font-size: 18pt; font-weight: 600; margin: 0 0 10px 0; letter-spacing: 2px; }
+        .student-info { text-align: right; font-size: 11pt; font-family: 'Malgun Gothic', sans-serif; font-weight: bold; }
+        .content-wrapper { column-count: 2; column-gap: 12mm; column-rule: 1px solid #aaa; }
+        .question-block { break-inside: avoid; margin-bottom: 9mm; }
+        .q-title { font-weight: 600; font-size: 10.5pt; margin-bottom: 4px; font-family: 'Malgun Gothic', sans-serif; }
+        .passage-box { border: 1px solid #333; padding: 7px 9px; margin-bottom: 6px; text-align: justify; word-break: break-all; font-size: 9.5pt; line-height: 1.45; }
+        .q-text { font-weight: 600; margin-bottom: 6px; font-size: 10pt; }
+        .condition-box { background-color: #fafafa; border: 1px dashed #666; padding: 7px 9px; margin-bottom: 6px; font-size: 9pt; font-family: 'Malgun Gothic', sans-serif; }
+        .condition-title { font-weight: bold; display: block; margin-bottom: 2px; }
+        .condition-box ul { margin: 0; padding-left: 18px; }
+        .condition-box li { margin-bottom: 2px; }
+        .answer-space { margin-top: 6px; height: 35mm; background-image: linear-gradient(to bottom, transparent 90%, #ccc 90%); background-size: 100% 8mm; }
+        
+        /* 가로형 원고지 칸 스타일 적용 (30칸) */
+        .grid-space {
+            margin-top: 10px; display: grid; grid-template-columns: repeat(15, 1fr); width: 100%;
+            border-top: 1px solid #999; border-left: 1px solid #999;
+        }
+        .grid-cell { height: 9mm; border-right: 1px solid #999; border-bottom: 1px solid #999; box-sizing: border-box; }
+        
+        .controls { text-align: center; margin-bottom: 20px; }
+        .print-btn { background-color: #2563eb; color: white; border: none; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; }
+        @media print {
+            body { background: none; padding: 0; } .page-container { box-shadow: none; padding: 0; width: 100%; margin: 0; }
+            .no-print { display: none !important; } .condition-box { background-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls no-print">
+        <button class="print-btn" onclick="window.print()">🖨️ 인쇄하기 (용지: B4 설정 요망)</button>
+        <p style="margin-top: 10px; color: #555; font-size: 14px;">인쇄 설정에서 <strong>'용지 크기: B4'</strong>, <strong>'배경 그래픽 해제'</strong>로 설정하시면 딱 2장으로 깔끔하게 출력됩니다.</p>
+    </div>
+    
+    <!-- 첫 번째 페이지 (1~5번) -->
+    <div class="page-container">
+        <div class="header">
+            <h1>중학교 1학년 국어 서논술형의 기초 파악하기 (1)</h1>
+            <div class="student-info">1학년 ( &nbsp;&nbsp;&nbsp; )반 ( &nbsp;&nbsp;&nbsp; )번 &nbsp; 이름: ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</div>
+        </div>
+        <div class="content-wrapper">
+            
+            <div class="question-block">
+                <div class="q-title">[문제 1] [시] 비유적 표현의 의미와 효과</div>
+                <div class="passage-box">기나긴 겨울잠에서 깨어난 대지 위로 봄비가 내린다. 톡톡 창문을 두드리는 봄비는 내 얼굴을 부드럽게 쓰다듬는 엄마의 손길이다. 꽁꽁 얼어붙었던 흙을 녹이고, 바싹 메마른 나뭇가지마다 초록빛 생명을 훅 하고 불어넣는 마술사이다. 이 비가 그치고 나면 온 세상은 다시 다채로운 색깔로 물들며 기지개를 켤 것이다.</div>
+                <div class="q-text">Q. 위 시에서 ‘봄비’를 표현하기 위해 사용된 비유적 표현(원관념과 보조관념)을 찾고, 이러한 표현을 사용했을 때의 효과를 서술하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>원관념과 보조관념을 각각 2개씩 명시할 것.</li><li>비유법의 종류 중 어떤 것이 쓰였는지 명시할 것.</li><li>효과를 ‘독자의 이해’ 측면에서 서술할 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것.</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">[문제 2] [소설] 인물의 갈등 유형 분석</div>
+                <div class="passage-box">지훈이는 책상에 앉아 스마트폰과 수학 문제집을 번갈아 보며 깊은 한숨을 쉬었다. '아, 내일이 수학 수행평가인데… 진짜 딱 10분만 게임을 하고 할까? 아니야, 저번 중간고사 때도 그러다가 결국 밤을 꼴딱 새우고 시험을 망쳤잖아. 그래도 지금 머리가 너무 아픈데 한 판만 하면 집중이 더 잘 되지 않을까?' 지훈이의 머릿속은 게임의 유혹과 공부를 해야 한다는 책임감이라는 두 가지 생각으로 복잡하게 얽혀 도무지 결론이 나지 않았다.</div>
+                <div class="q-text">Q. 제시글에 나타난 지훈이의 갈등 유형을 밝히고, 갈등이 발생하는 원인을 서술하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>갈등의 유형(내적 갈등, 외적 갈등)을 정확히 명시할 것.</li><li>원인을 '무엇'과 '무엇' 사이의 고민인지 구체적으로 밝힐 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것. (끝은 '~때문이다.'로 맺을 것)</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">[문제 3] [설명문] 중심 내용 요약하기</div>
+                <div class="passage-box">우리가 흔히 진흙밭이라고 생각하기 쉬운 갯벌은 사실 우리에게 상상 이상으로 많은 것을 내어주는 소중한 공간이다. 첫째, 갯벌은 수많은 조개, 게, 낙지 등 다양한 해양 생물들이 안전하게 살아가는 거대한 서식지 역할을 한다. 둘째, 갯벌은 육지에서 흘러나온 각종 오염 물질들을 그물처럼 걸러내어 바다를 깨끗하게 정화해 주는 자연의 필터 역할을 한다. 셋째, 갯벌은 푹신한 스펀지처럼 물을 흡수하여 홍수나 태풍 같은 거대한 자연재해로부터 육지의 피해를 획기적으로 줄여주는 든든한 방파제 역할도 수행한다.</div>
+                <div class="q-text">Q. 제시글을 읽고, 글쓴이가 말하고자 하는 갯벌의 가치(역할)를 요약하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>갯벌의 역할을 3가지 모두 포함할 것.</li><li>쉼표(,)를 적절히 사용하여 나열할 것.</li><li>30자 이내로 작성할 것(공백 포함).</li><li>맞춤법에 맞게 완성된 하나의 문장으로 표현할 것.</li></ul>
+                </div>
+                <!-- 가로 15칸 * 세로 2줄 = 총 30칸 그리드 원고지 -->
+                <div class="grid-space">
+                    <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">[문제 4] [논설문] 근거의 타당성 평가</div>
+                <div class="passage-box">최근 우리 학교 쓰레기통을 보면 일회용 플라스틱 컵이 넘쳐나고 있다. 우리는 교내에서 일회용 플라스틱 컵 사용을 전면 금지해야 한다. 플라스틱은 자연 상태에서 썩는 데 수백 년 이상이 걸려 생태계를 심각하게 파괴하기 때문이다. 우리가 매일 무심코 버리는 컵 하나가 훗날 거대한 환경 재앙으로 돌아올 수 있다. <u>게다가 플라스틱 컵을 안 쓰면 우리 학교 축구부의 주말 리그 성적도 훌쩍 올라갈 것이다.</u> 따라서 텀블러 사용을 생활화해야 한다.</div>
+                <div class="q-text">Q. 제시글의 밑줄 친 문장이 주장을 뒷받침하는 근거로 타당한지 판단하고, 그 이유를 서술하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>타당성 여부(타당하다 / 타당하지 않다)를 명확히 밝힐 것.</li><li>주장과 근거 사이의 '연관성'이라는 단어를 사용할 것.</li><li>두 개의 문장으로 나누어 작성할 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것.</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">[문제 5] [문법] 품사의 분류 기준 파악</div>
+                <div class="passage-box">다음 두 문장을 읽고 밑줄 친 단어에 주목해 보자.<br>우리 속담에 (가) <u>하나</u>를 알면 열을 안다는 말이 있다. 이는 한 가지 사실을 통해 여러 이치를 미루어 짐작할 수 있는 총명함을 뜻한다. 어제 동생은 이 속담을 배우고 오더니, 식탁 위에 있던 (나) 사과 <u>한</u> 개를 집어 먹으면서 자신도 하나를 먹고 열 가지 맛을 알겠다고 너스레를 떨었다. 이처럼 우리말에는 형태나 의미가 비슷해도 쓰임에 따라 품사가 달라지는 경우가 많다.</div>
+                <div class="q-text">Q. 제시글의 (가)와 (나)에 쓰인 밑줄 친 단어의 품사를 각각 쓰고, 둘의 품사가 다름을 구별할 수 있는 문법적 이유를 서술하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>(가)와 (나)의 품사 이름을 정확한 문법 용어로 쓸 것.</li><li>뒤에 오는 말(조사)과의 결합 여부를 근거로 삼을 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것.</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 두 번째 페이지 (6~10번) -->
+    <div class="page-container">
+        <div class="header">
+            <h1>중학교 1학년 국어 서논술형의 기초 파악하기 (2)</h1>
+            <div class="student-info">1학년 ( &nbsp;&nbsp;&nbsp; )반 ( &nbsp;&nbsp;&nbsp; )번 &nbsp; 이름: ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</div>
+        </div>
+        <div class="content-wrapper">
+
+            <div class="question-block">
+                <div class="q-title">[문제 6] [문법] 어휘의 의미 관계 파악</div>
+                <div class="passage-box">단어들은 서로 홀로 존재하지 않고 일정한 의미 관계를 맺으며 무리를 이룬다. 예를 들어, 오늘 날씨가 ㉠ '<u class='underline decoration-gray-500'>춥다</u>'와 내일 날씨가 '<u class='underline decoration-gray-500'>덥다</u>'처럼 서로 반대되는 뜻을 가진 단어들이 있다. 한편, 우리가 자주 먹는 간식 중 ㉡ '<u class='underline decoration-gray-500'>과일</u>'이라는 큰 범주 안에는 '<u class='underline decoration-gray-500'>딸기</u>', '사과', '포도'처럼 그 범주에 포함되는 단어들이 존재한다. 이러한 단어들의 관계를 정확히 이해하면 어휘력을 크게 향상시킬 수 있다.</div>
+                <div class="q-text">Q. 수진이의 말하기 방식이 지닌 문제점을 지적하고, 이를 '공감적 듣기(반영하기)'의 방법이 드러나도록 고쳐 쓰시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>수진이의 문제점을 상대방의 '감정' 측면에서 서술할 것.</li><li>고쳐 쓴 문장에는 감정을 읽어주는 표현을 반드시 포함할 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것. (대화문 형태 가능)</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">[문제 8] [매체] 매체 자료의 비유적 표현 분석</div>
+                <div class="passage-box">다음은 환경 보호를 위한 공익 광고 문구이다.<br>"우리의 편안함이 숲의 숨통을 조이고 있습니다. 당신이 무심코 뽑아 쓴 종이컵 한 개, 닦고 버린 휴지 한 장이 모여 울창했던 아마존의 나무들을 멍들게 합니다. 편리함을 위해 쓰고 버리는 1초의 시간, 하지만 잘려 나간 나무가 다시 자라는 데는 100년의 시간이 필요합니다. 지금 당신의 손에 들린 일회용품을 내려놓는 순간, 죽어가는 숲이 다시 숨을 쉬기 시작합니다."</div>
+                <div class="q-text">Q. 제시된 공익 광고가 전달하고자 하는 핵심 주제를 쓰고, '숲의 숨통을 조이고 있습니다'와 같이 표현했을 때 독자에게 주는 효과를 서술하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>핵심 주제를 '일회용품 사용'이라는 단어를 포함하여 쓸 것.</li><li>표현의 효과는 '경각심'이라는 단어를 포함하여 서술할 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것.</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">[문제 9] [소설] 시점과 서술자 파악</div>
+                <div class="passage-box">동백꽃이 흐드러지게 핀 산길을 걸어 내려오는데, 저만치 앞에서 점순이가 우리 집 수탉을 붙잡고 또 억지로 싸움을 붙이고 있는 것이 보였다. 화가 머리끝까지 치밀어 올랐지만, 우리 집이 점순네 땅을 빌려 농사를 짓는 소작농 신세이기 때문에 꾹 참을 수밖에 없었다. 내가 다가가자 점순이는 얄미운 표정으로 샐쭉 웃어 보였다. 도대체 저 애는 왜 시도 때도 없이 나를 못살게 구는 것일까? 나는 점순이의 속마음을 도무지 알 수가 없어서 가슴만 답답해졌다.</div>
+                <div class="q-text">Q. 제시글을 바탕으로 이 소설의 시점을 밝히고, 이 시점이 독자에게 주는 효과를 서술하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>시점의 명칭(1인칭 주인공 시점 등)을 정확히 쓸 것.</li><li>'나'라는 서술자가 등장한다는 사실을 판단 근거로 제시할 것.</li><li>심리 전달의 장점을 '친밀감' 또는 '생생함' 단어를 사용할 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것.</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">[문제 10] [쓰기] 통일성에 맞게 고쳐쓰기</div>
+                <div class="passage-box">(가) 최근 건강 관리를 위해 자전거 타기를 즐기는 청소년들이 늘어나고 있는데, 자전거 타기는 신체적, 정신적 건강에 매우 좋은 운동이다. (나) 첫째, 자전거의 페달을 밟는 과정을 통해 하체 근력이 탄탄하게 강화되고 전신의 심폐 지구력이 크게 높아진다. (다) 둘째, 시원한 바람을 마시며 달리다 보면 학업 스트레스를 건강하게 해소할 수 있다. (라) 하지만 자전거는 가격이 매우 비싸고 도난의 위험이 높으므로 반드시 튼튼한 자물쇠를 꼭 채워두어야 한다. (마) 따라서 우리는 안전하고 꾸준한 자전거 타기 습관을 길러 몸과 마음의 건강을 지켜야 한다.</div>
+                <div class="q-text">Q. '통일성'을 고려할 때, 제시글에서 삭제해야 할 문장의 기호를 고르고 그 이유를 서술하시오.</div>
+                <div class="condition-box">
+                    <span class="condition-title">&lt;작성 조건&gt;</span>
+                    <ul><li>삭제할 문장의 기호((가)~(마))를 명시할 것.</li><li>제시글의 '핵심 주제'를 밝혀 적을 것.</li><li>삭제해야 하는 이유를 '핵심 주제와의 연관성'을 중심으로 설명할 것.</li><li>맞춤법에 맞게 완성된 문장으로 표현할 것.</li></ul>
+                </div>
+                <div class="answer-space"></div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+    </script>
+
+    <script>
+        // 10종의 문제 데이터를 완벽히 구성합니다.
+        const quizData = [
+            {
+                title: "[문제 1] [시] 비유적 표현의 의미와 효과",
+                passage: "기나긴 겨울잠에서 깨어난 대지 위로 봄비가 내린다. 톡톡 창문을 두드리는 봄비는 내 얼굴을 부드럽게 쓰다듬는 엄마의 손길이다. 꽁꽁 얼어붙었던 흙을 녹이고, 바싹 메마른 나뭇가지마다 초록빛 생명을 훅 하고 불어넣는 마술사이다. 이 비가 그치고 나면 온 세상은 다시 다채로운 색깔로 물들며 기지개를 켤 것이다.",
+                question: "Q. 위 시에서 ‘봄비’를 표현하기 위해 사용된 비유적 표현(원관념과 보조관념)을 찾고, 이러한 표현을 사용했을 때의 효과를 서술하시오.",
+                conditions: [
+                    "원관념과 보조관념을 각각 2개씩 명시할 것.",
+                    "비유법의 종류 중 어떤 것이 쓰였는지 명시할 것.",
+                    "효과를 ‘독자의 이해’ 측면에서 서술할 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: 원관념은 '봄비', 보조관념은 '엄마의 손길', '마술사'. 형태는 '~은 ~이다'이므로 '은유법'.<br>Step 2. 문장 완성하기: 명사형으로 끝내지 않고 서술어를 완벽하게 갖춘 문장으로 작성합니다.",
+                answer: "위 시에서는 은유법을 사용하여 원관념인 '봄비'를 보조관념인 '엄마의 손길'과 '마술사'에 빗대어 표현하고 있다. 이러한 비유적 표현을 사용하면 봄비의 포근하고 생명력 넘치는 속성을 독자가 생생하고 구체적으로 이해할 수 있다는 효과가 있다."
+            },
+            {
+                title: "[문제 2] [소설] 인물의 갈등 유형 분석",
+                passage: "지훈이는 책상에 앉아 스마트폰과 수학 문제집을 번갈아 보며 깊은 한숨을 쉬었다. '아, 내일이 수학 수행평가인데… 진짜 딱 10분만 게임을 하고 할까? 아니야, 저번 중간고사 때도 그러다가 결국 밤을 꼴딱 새우고 시험을 망쳤잖아. 그래도 지금 머리가 너무 아픈데 한 판만 하면 집중이 더 잘 되지 않을까?' 지훈이의 머릿속은 게임의 유혹과 공부를 해야 한다는 책임감이라는 두 가지 생각으로 복잡하게 얽혀 도무지 결론이 나지 않았다.",
+                question: "Q. 제시글에 나타난 지훈이의 갈등 유형을 밝히고, 갈등이 발생하는 원인을 서술하시오.",
+                conditions: [
+                    "갈등의 유형(내적 갈등, 외적 갈등)을 정확히 명시할 것.",
+                    "원인을 '무엇'과 '무엇' 사이의 고민인지 구체적으로 밝힐 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것. (끝은 '~때문이다.'로 맺을 것)"
+                ],
+                guide: "Step 1. 단서 찾기: 혼자 마음속으로 고민하므로 '내적 갈등'. 고민 내용은 '게임하기' vs '수학 공부하기'.<br>Step 2. 문장 완성하기: 원인을 묻는 질문이므로 호응에 맞게 '~때문이다.'로 문장을 마무리해야 완성된 문장이 됩니다.",
+                answer: "제시글에 나타난 갈등 유형은 내적 갈등이다. 그 원인은 내일 있는 수학 수행평가 공부를 해야 한다는 생각과 당장 스마트폰 게임을 하고 싶다는 욕구 사이에서 지훈이가 고민하고 있기 때문이다."
+            },
+            {
+                title: "[문제 3] [설명문] 중심 내용 요약하기",
+                passage: "우리가 흔히 진흙밭이라고 생각하기 쉬운 갯벌은 사실 우리에게 상상 이상으로 많은 것을 내어주는 소중한 공간이다. 첫째, 갯벌은 수많은 조개, 게, 낙지 등 다양한 해양 생물들이 안전하게 살아가는 거대한 서식지 역할을 한다. 둘째, 갯벌은 육지에서 흘러나온 각종 오염 물질들을 그물처럼 걸러내어 바다를 깨끗하게 정화해 주는 자연의 필터 역할을 한다. 셋째, 갯벌은 푹신한 스펀지처럼 물을 흡수하여 홍수나 태풍 같은 거대한 자연재해로부터 육지의 피해를 획기적으로 줄여주는 든든한 방파제 역할도 수행한다.",
+                question: "Q. 제시글을 읽고, 글쓴이가 말하고자 하는 갯벌의 가치(역할)를 요약하시오.",
+                conditions: [
+                    "갯벌의 역할을 3가지 모두 포함할 것.",
+                    "쉼표(,)를 적절히 사용하여 나열할 것.",
+                    "30자 이내로 작성할 것(공백 포함).",
+                    "맞춤법에 맞게 완성된 하나의 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: 세 가지 역할 = 생물 서식지, 오염 물질 정화, 자연재해 예방.<br>Step 2. 문장 완성하기: 조건 3(30자 이내)과 조건 4(완성된 문장)를 동시에 충족하려면 불필요한 수식어를 빼고 서술어를 간결하게 맺어야 합니다.",
+                answer: "갯벌은 생물 서식, 오염 정화, 재해 예방의 역할을 한다."
+            },
+            {
+                title: "[문제 4] [논설문] 근거의 타당성 평가",
+                passage: "최근 우리 학교 쓰레기통을 보면 일회용 플라스틱 컵이 넘쳐나고 있다. 우리는 교내에서 일회용 플라스틱 컵 사용을 전면 금지해야 한다. 플라스틱은 자연 상태에서 썩는 데 수백 년 이상이 걸려 생태계를 심각하게 파괴하기 때문이다. 우리가 매일 무심코 버리는 컵 하나가 훗날 거대한 환경 재앙으로 돌아올 수 있다. <u class='underline decoration-gray-500'>게다가 플라스틱 컵을 안 쓰면 우리 학교 축구부의 주말 리그 성적도 훌쩍 올라갈 것이다.</u> 따라서 텀블러 사용을 생활화해야 한다.",
+                question: "Q. 제시글의 밑줄 친 문장이 주장을 뒷받침하는 근거로 타당한지 판단하고, 그 이유를 서술하시오.",
+                conditions: [
+                    "타당성 여부(타당하다 / 타당하지 않다)를 명확히 밝힐 것.",
+                    "주장과 근거 사이의 '연관성'이라는 단어를 사용할 것.",
+                    "두 개의 문장으로 나누어 작성할 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: 일회용 컵 사용 금지와 축구부 성적은 논리적으로 상관이 없습니다.<br>Step 2. 문장 완성하기: 판단 한 문장, 이유 한 문장으로 명확히 끊어주어야 마침표가 2개인 완성된 글이 됩니다.",
+                answer: "밑줄 친 문장은 주장을 뒷받침하는 근거로 타당하지 않다. 플라스틱 컵 사용을 줄이는 환경 보호 문제와 학교 축구부의 성적 향상 사이에는 아무런 논리적 연관성이 없기 때문이다."
+            },
+            {
+                title: "[문제 5] [문법] 품사의 분류 기준 파악",
+                passage: "다음 두 문장을 읽고 밑줄 친 단어에 주목해 보자.<br>우리 속담에 (가) <u class='underline decoration-gray-500'>하나</u>를 알면 열을 안다는 말이 있다. 이는 한 가지 사실을 통해 여러 이치를 미루어 짐작할 수 있는 총명함을 뜻한다. 어제 동생은 이 속담을 배우고 오더니, 식탁 위에 있던 (나) 사과 <u class='underline decoration-gray-500'>한</u> 개를 집어 먹으면서 자신도 하나를 먹고 열 가지 맛을 알겠다고 너스레를 떨었다. 이처럼 우리말에는 형태나 의미가 비슷해도 쓰임에 따라 품사가 달라지는 경우가 많다.",
+                question: "Q. 제시글의 (가)와 (나)에 쓰인 밑줄 친 단어의 품사를 각각 쓰고, 둘의 품사가 다름을 구별할 수 있는 문법적 이유를 서술하시오.",
+                conditions: [
+                    "(가)와 (나)의 품사 이름을 정확한 문법 용어로 쓸 것.",
+                    "뒤에 오는 말(조사)과의 결합 여부를 근거로 삼을 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: (가)의 '하나' 뒤에는 조사 '를'이 붙었으므로 체언인 수사. (나)의 '한'은 조사 없이 명사 '개'를 꾸미므로 관형사.<br>Step 2. 문장 완성하기: '(가) 수사, (나) 관형사. 조사가 붙어서'와 같이 개요식으로 쓰면 감점입니다. 주어와 서술어를 온전히 갖추어 적으세요.",
+                answer: "(가)의 '하나'는 수사이고, (나)의 '한'은 관형사이다. 그 이유는 (가)의 '하나'는 뒤에 '를'과 같은 조사가 결합할 수 있지만, (나)의 '한'은 조사와 결합할 수 없고 뒤에 오는 명사를 꾸며주기만 하기 때문이다."
+            },
+            {
+                title: "[문제 6] [문법] 어휘의 의미 관계 파악",
+                passage: "단어들은 서로 홀로 존재하지 않고 일정한 의미 관계를 맺으며 무리를 이룬다. 예를 들어, 오늘 날씨가 ㉠ '<u class='underline decoration-gray-500'>춥다</u>'와 내일 날씨가 '<u class='underline decoration-gray-500'>덥다</u>'처럼 서로 반대되는 뜻을 가진 단어들이 있다. 한편, 우리가 자주 먹는 간식 중 ㉡ '<u class='underline decoration-gray-500'>과일</u>'이라는 큰 범주 안에는 '<u class='underline decoration-gray-500'>딸기</u>', '사과', '포도'처럼 그 범주에 포함되는 단어들이 존재한다. 이러한 단어들의 관계를 정확히 이해하면 어휘력을 크게 향상시킬 수 있다.",
+                question: "Q. ㉠ 단어들과 ㉡ 단어들이 각각 어떤 의미 관계를 맺고 있는지 문법 용어로 쓰고, ㉠ 관계의 특징을 하나 서술하시오.",
+                conditions: [
+                    "㉠과 ㉡의 의미 관계를 정확히 명시할 것.",
+                    "㉠ 관계의 특징을 '중간항(중간 단계)'을 포함하여 설명할 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: ㉠은 반의 관계, ㉡은 상하 관계. '춥다-덥다' 사이에는 '따뜻하다, 선선하다' 등 중간 단계가 존재합니다.<br>Step 2. 문장 완성하기: 제시된 단어들을 주어로 삼아 의미 관계와 특징을 명확한 서술어로 맺어줍니다.",
+                answer: "㉠은 반의 관계이고, ㉡은 상하 관계이다. ㉠과 같은 반의 관계는 '춥다'와 '덥다'라는 두 단어 사이에 '따뜻하다'와 같은 중간항이 존재할 수 있다는 특징이 있다."
+            },
+            {
+                title: "[문제 7] [소통] 배려하며 말하기",
+                passage: "<strong>민수:</strong> (시무룩하게) 아, 이번 국어 시험은 진짜 열심히 준비했는데… 매일 남아서 자습도 하고 숙제도 다 해갔단 말이야. 그런데 점수가 너무 떨어졌어. 진짜 노력해도 안 되는 건가 싶고 너무 속상해.<br><strong>수진:</strong> 넌 항상 평소에는 놀다가 꼭 시험 전날에만 벼락치기를 하니까 그렇지. 공부는 꾸준히 해야 오르는 거야. 다음부터는 평소에 예습 복습을 좀 해. 우울해하지 말고 책이나 펴.",
+                question: "Q. 수진이의 말하기 방식이 지닌 문제점을 지적하고, 이를 '공감적 듣기(반영하기)'의 방법이 드러나도록 고쳐 쓰시오.",
+                conditions: [
+                    "수진이의 문제점을 상대방의 '감정' 측면에서 서술할 것.",
+                    "고쳐 쓴 문장에는 감정을 읽어주는 표현을 반드시 포함할 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것. (대화문 형태 가능)"
+                ],
+                guide: "Step 1. 단서 찾기: 수진이는 충고만 하고 민수의 마음을 알아주지 않았습니다.<br>Step 2. 문장 완성하기: 문제점을 지적하는 문장 하나와, 대화문 기호(\"\")를 사용하여 직접 고쳐 쓴 문장을 연결하여 완성합니다.",
+                answer: "수진이는 민수의 속상한 감정을 이해해주지 않고 비판만 하고 있다는 문제점이 있다. 이를 공감적 듣기로 고쳐 쓰면 \"열심히 공부했는데 점수가 떨어져서 정말 속상하겠다.\"라고 말할 수 있다."
+            },
+            {
+                title: "[문제 8] [매체] 매체 자료의 비유적 표현 분석",
+                passage: "다음은 환경 보호를 위한 공익 광고 문구이다.<br>\"우리의 편안함이 숲의 숨통을 조이고 있습니다. 당신이 무심코 뽑아 쓴 종이컵 한 개, 닦고 버린 휴지 한 장이 모여 울창했던 아마존의 나무들을 멍들게 합니다. 편리함을 위해 쓰고 버리는 1초의 시간, 하지만 잘려 나간 나무가 다시 자라는 데는 100년의 시간이 필요합니다. 지금 당신의 손에 들린 일회용품을 내려놓는 순간, 죽어가는 숲이 다시 숨을 쉬기 시작합니다.\"",
+                question: "Q. 제시된 공익 광고가 전달하고자 하는 핵심 주제를 쓰고, '숲의 숨통을 조이고 있습니다'와 같이 표현했을 때 독자에게 주는 효과를 서술하시오.",
+                conditions: [
+                    "핵심 주제를 '일회용품 사용'이라는 단어를 포함하여 쓸 것.",
+                    "표현의 효과는 '경각심'이라는 단어를 포함하여 서술할 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: 지구가 숨통이 막힌다는 것은 환경 파괴의 위험해진다는 경고를 상징합니다.<br>Step 2. 문장 완성하기: 주제와 효과를 각각 명확한 서술어로 마무리하여 두 가지 요구사항이 문장 속에 모두 담기게 합니다.",
+                answer: "이 광고 포스터가 전달하고자 하는 핵심 주제는 일회용품 사용으로 인한 환경 파괴의 심각성이다. 숲을 숨통이 조이는 생명체로 표현함으로써, 독자들에게 환경 문제에 대한 경각심을 효과적으로 일깨워 준다."
+            },
+            {
+                title: "[문제 9] [소설] 시점과 서술자 파악",
+                passage: "동백꽃이 흐드러지게 핀 산길을 걸어 내려오는데, 저만치 앞에서 점순이가 우리 집 수탉을 붙잡고 또 억지로 싸움을 붙이고 있는 것이 보였다. 화가 머리끝까지 치밀어 올랐지만, 우리 집이 점순네 땅을 빌려 농사를 짓는 소작농 신세이기 때문에 꾹 참을 수밖에 없었다. 내가 다가가자 점순이는 얄미운 표정으로 샐쭉 웃어 보였다. 도대체 저 애는 왜 시도 때도 없이 나를 못살게 구는 것일까? 나는 점순이의 속마음을 도무지 알 수가 없어서 가슴만 답답해졌다.",
+                question: "Q. 제시글을 바탕으로 이 소설의 시점을 밝히고, 이 시점이 독자에게 주는 효과를 서술하시오.",
+                conditions: [
+                    "시점의 명칭(1인칭 주인공 시점 등)을 정확히 쓸 것.",
+                    "'나'라는 서술자가 등장한다는 사실을 판단 근거로 제시할 것.",
+                    "심리 전달의 장점을 '친밀감' 또는 '생생함' 단어를 사용할 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: 작품 속에 '나'가 등장하고 직접 심리를 고백하므로 1인칭 주인공 시점.<br>Step 2. 문장 완성하기: 근거-시점-효과의 순서로 문장 성분이 빠짐없이 들어가도록 매끄럽게 연결합니다.",
+                answer: "이 소설은 작품 속에 서술자인 '나'가 직접 등장하여 자신의 이야기를 전달하고 있으므로 1인칭 주인공 시점이다. 이 시점은 주인공의 속마음을 독자에게 직접 들려주어 심리를 생생하게 전달하고 친밀감을 준다는 효과가 있다."
+            },
+            {
+                title: "[문제 10] [쓰기] 통일성에 맞게 고쳐쓰기",
+                passage: "(가) 최근 건강 관리를 위해 자전거 타기를 즐기는 청소년들이 늘어나고 있는데, 자전거 타기는 신체적, 정신적 건강에 매우 좋은 운동이다. (나) 첫째, 자전거의 페달을 밟는 과정을 통해 하체 근력이 탄탄하게 강화되고 전신의 심폐 지구력이 크게 높아진다. (다) 둘째, 시원한 바람을 마시며 달리다 보면 학업 스트레스를 건강하게 해소할 수 있다. (라) 하지만 자전거는 가격이 매우 비싸고 도난의 위험이 높으므로 반드시 튼튼한 자물쇠를 꼭 채워두어야 한다. (마) 따라서 우리는 안전하고 꾸준한 자전거 타기 습관을 길러 몸과 마음의 건강을 지켜야 한다.",
+                question: "Q. '통일성'을 고려할 때, 제시글에서 삭제해야 할 문장의 기호를 고르고 그 이유를 서술하시오.",
+                conditions: [
+                    "삭제할 문장의 기호((가)~(마))를 명시할 것.",
+                    "제시글의 '핵심 주제'를 밝혀 적을 것.",
+                    "삭제해야 하는 이유를 '핵심 주제와의 연관성'을 중심으로 설명할 것.",
+                    "맞춤법에 맞게 완성된 문장으로 표현할 것."
+                ],
+                guide: "Step 1. 단서 찾기: 전체 주제는 '자전거 타기가 건강에 미치는 긍정적 영향'. (라) 문장은 '도난 주의'라는 전혀 다른 이야기입니다.<br>Step 2. 문장 완성하기: '이유'를 물었으므로 '~때문이다'로 호응을 맞추어 문장을 종결합니다.",
+                answer: "삭제해야 할 문장은 (라)이다. 이 글의 핵심 주제는 '자전거 타기가 건강에 주는 장점'인데, (라) 문장은 자전거 도난 예방이라는 전혀 다른 내용을 다루고 있어 글의 핵심 주제와 연관성이 떨어져 통일성을 해치기 때문이다."
+            }
+        ];
+
+        let currentIndex = 0;
+        const userAnswers = new Array(quizData.length).fill("");
+
+        function renderMenu() {
+            const menuList = document.getElementById('menuList');
+            menuList.innerHTML = quizData.map((quiz, index) => `
+                <button onclick="changeTabTo(${index})" class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${index === currentIndex ? 'bg-blue-100 text-blue-800 font-bold' : 'text-gray-600 hover:bg-gray-100'}">
+                    ${index + 1}. ${quiz.title.split(']')[1].replace('[', '')}
+                </button>
+            `).join('');
+        }
+
+        function renderContent(index) {
+            const data = quizData[index];
+            const contentArea = document.getElementById('contentArea');
+            
+            let conditionHTML = data.conditions.map(cond => `<li class="ml-4 mb-1 list-disc text-sm text-gray-700">${cond}</li>`).join('');
+            
+            // 문제 3번일 경우 글자 수 카운터 추가
+            let charCounterHTML = index === 2 
+                ? `<div id="charCounter" class="text-right text-xs mt-1 font-bold text-gray-500">(현재 글자 수: ${userAnswers[index].length}자 / 30자)</div>` 
+                : '';
+
+            contentArea.innerHTML = `
+                <div class="fade-in max-w-3xl mx-auto">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">${data.title}</h2>
+                    
+                    <div class="bg-gray-100 p-5 rounded-lg border border-gray-300 mb-6 text-gray-800 leading-relaxed text-sm shadow-inner">
+                        ${data.passage}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p class="font-bold text-lg text-blue-900 mb-2">${data.question}</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-6">
+                        <p class="font-bold text-blue-800 mb-2 text-sm">&lt;작성 조건&gt;</p>
+                        <ul class="list-inside">${conditionHTML}</ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label class="block font-bold text-gray-700 mb-2">학생 답안 작성란 (연습용)</label>
+                        <textarea id="studentAnswer" class="w-full h-32 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none text-sm" placeholder="여기에 조건을 맞추어 답안을 작성해 보세요." oninput="saveAnswer(${index}, this.value)">${userAnswers[index]}</textarea>
+                        ${charCounterHTML}
+                    </div>
+                    
+                    <div class="flex gap-3 mb-6">
+                        <button onclick="toggleSection('guide')" class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-lg hover:bg-yellow-200 transition text-sm font-bold shadow-sm">💡 풀이 가이드 보기</button>
+                        <button onclick="toggleSection('answer')" class="px-4 py-2 bg-green-100 text-green-800 rounded-lg hover:bg-green-200 transition text-sm font-bold shadow-sm">✅ 모범 답안 보기</button>
+                    </div>
+                    
+                    <div id="guide" class="hidden bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg mb-4 text-sm leading-relaxed text-gray-800">
+                        <p class="font-bold mb-1 text-yellow-800">선생님의 꼼꼼한 풀이 가이드</p>
+                        ${data.guide}
+                    </div>
+                    
+                    <div id="answer" class="hidden bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg text-sm leading-relaxed font-bold text-gray-900">
+                        <p class="font-bold mb-1 text-green-800 text-xs">모범 답안</p>
+                        ${data.answer}
+                    </div>
+                </div>
+            `;
+            updateNavigation();
+        }
+
+        function saveAnswer(index, value) {
+            userAnswers[index] = value;
+            if (index === 2) { // 3번 요약 문제의 글자 수 카운팅
+                const counter = document.getElementById('charCounter');
+                const len = value.length;
+                counter.textContent = `(현재 글자 수: ${len}자 / 30자)`;
+                if (len > 30) {
+                    counter.classList.replace('text-gray-500', 'text-red-600');
+                } else {
+                    counter.classList.replace('text-red-600', 'text-gray-500');
+                }
+            }
+        }
+
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+            el.classList.add('fade-in');
+        }
+
+        function changeTab(offset) {
+            const newIndex = currentIndex + offset;
+            if (newIndex >= 0 && newIndex < quizData.length) {
+                currentIndex = newIndex;
+                renderMenu();
+                renderContent(currentIndex);
+            }
+        }
+
+        function changeTabTo(index) {
+            currentIndex = index;
+            renderMenu();
+            renderContent(currentIndex);
+        }
+
+        function updateNavigation() {
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === quizData.length - 1;
+            document.getElementById('pageIndicator').textContent = `${currentIndex + 1} / ${quizData.length}`;
+        }
+
+        // B4 학습지 생성 및 다운로드 함수
+        function downloadWorksheet() {
+            // template 태그 안의 순수한 HTML 문자열을 가져옴
+            const templateContent = document.getElementById('worksheetTemplate').innerHTML;
+            
+            // HTML 파일로 저장하기 위해 Blob 객체 생성
+            const blob = new Blob([templateContent], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            // 가상 링크를 만들어 다운로드 트리거
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '학생용_서논술형_학습지_B4.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 초기화
+        window.onload = () => {
+            renderMenu();
+            renderContent(0);
+        };
+    </script>
+</body>
+</html>
